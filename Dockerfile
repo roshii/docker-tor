@@ -15,9 +15,6 @@ RUN rm /etc/tor/torrc
 RUN chown debian-tor:debian-tor /etc/tor
 RUN chown debian-tor:debian-tor /var/log/tor
 
-COPY start-tor.sh /usr/local/bin
-RUN chmod 0755 /usr/local/bin/start-tor.sh
-
 USER debian-tor
 
 ENTRYPOINT ["tor", "-f", "/etc/tor/torrc"]
