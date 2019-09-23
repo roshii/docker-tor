@@ -5,10 +5,12 @@ LABEL maintainer="roshii <roshii@riseup.net>"
 
 # Install dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    apt-utils \
     tor \
     tor-geoipdb \
     obfs4proxy \
-    --no-install-recommends
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 # Our torrc resides on the host, linked with `volume` option
 RUN rm /etc/tor/torrc
