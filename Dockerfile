@@ -16,6 +16,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 RUN rm /etc/tor/torrc
 RUN chown debian-tor:debian-tor /etc/tor
 RUN chown debian-tor:debian-tor /var/log/tor
+RUN mkdir /var/lib/tor/hidden_service
+RUN chown debian-tor:debian-tor /var/lib/tor/hidden_service
 
 USER debian-tor
 
