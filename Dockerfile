@@ -14,10 +14,6 @@ RUN set -ex \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
-# add user and group with default ids
-RUN groupadd debian-tor \
-	&& useradd -g debian-tor -s /bin/bash -m -d /tor debian-tor
-
 # Our torrc resides on the host, linked with `volume` option
 RUN rm /etc/tor/torrc
 
