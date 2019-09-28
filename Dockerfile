@@ -3,22 +3,24 @@ FROM debian:buster-slim
 
 LABEL maintainer="roshii <roshii@riseup.net>"
 
-# Install dependencies
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    apt-utils \
-    tor \
-    tor-geoipdb \
-    obfs4proxy \
-    --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+# Install OS utilities
+RUN set -ex \
+	&& apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	apt-utils --no-install-recommends \
+	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	gosu tor tor-geoipdb obfs4proxy \
+	--no-install-recommends \
+	&& rm -rf /var/lib/apt/lists/*
+
+# add user and group with default ids
+RUN groupadd debian-tor \
+	&& useradd -g debian-tor -s /bin/bash -m -d /tor debian-tor
 
 # Our torrc resides on the host, linked with `volume` option
 RUN rm /etc/tor/torrc
-RUN chown debian-tor:debian-tor /etc/tor
-RUN chown debian-tor:debian-tor /var/log/tor
-RUN mkdir /var/lib/tor/hidden_service
-RUN chown debian-tor:debian-tor /var/lib/tor/hidden_service
 
-USER debian-tor
+COPY docker-entrypoint.sh /usr/local/bin/
 
-ENTRYPOINT ["tor", "-f", "/etc/tor/torrc"]
+ENTRYPOINT ["docker-entrypoint.sh"]
