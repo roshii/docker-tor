@@ -12,7 +12,7 @@ RUN set -ex \
 
 RUN set -ex \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
-	gosu tor tor-geoipdb obfs4proxy --no-install-recommends \
+	tor tor-geoipdb obfs4proxy --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm /etc/tor/torrc
 
