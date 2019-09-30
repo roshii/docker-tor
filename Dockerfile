@@ -10,15 +10,15 @@ RUN set -ex \
 	apt-utils --no-install-recommends \
 	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
+# Install Tor binaries
 RUN set -ex \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
-	tor tor-geoipdb obfs4proxy --no-install-recommends \
+	gosu tor tor-geoipdb obfs4proxy --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm /etc/tor/torrc
 
-RUN set -ex \
-	&& chown -R debian-tor /var/lib/tor
+# Copy startup script
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-USER debian-tor
-
-ENTRYPOINT ["tor", "-f", "/var/lib/tor/torrc"]
+ENTRYPOINT ["entrypoint.sh"]
