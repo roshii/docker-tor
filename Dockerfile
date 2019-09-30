@@ -18,4 +18,4 @@ RUN set -ex \
 
 USER debian-tor
 
-ENTRYPOINT ["tor" "-f" "/var/lib/tor/torrc"]
+ENTRYPOINT ["tor", "-f", "/var/lib/tor/torrc"]
