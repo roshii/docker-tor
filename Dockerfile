@@ -1,7 +1,7 @@
 # Base docker image
 FROM debian:buster-slim
 
-LABEL maintainer="roshii <roshii@riseup.net>"
+LABEL maintainer="Simon Castano <simon@brane.cc>"
 
 # Install OS utilities
 RUN set -ex \
