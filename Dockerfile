@@ -16,6 +16,6 @@ RUN set -ex \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm /etc/tor/torrc
 
-COPY docker-entrypoint.sh /usr/local/bin/
+USER debian-tor
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["tor" "-f" "/var/lib/tor/torrc"]
