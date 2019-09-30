@@ -1,24 +1,24 @@
 # Base docker image
 FROM debian:buster-slim
 
-LABEL maintainer="roshii <roshii@riseup.net>"
+LABEL maintainer="Simon Castano <simon@brane.cc>"
 
-# Install dependencies
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    apt-utils \
-    tor \
-    tor-geoipdb \
-    obfs4proxy \
-    --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+# Install OS utilities
+RUN set -ex \
+	&& apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	apt-utils --no-install-recommends \
+	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
-# Our torrc resides on the host, linked with `volume` option
-RUN rm /etc/tor/torrc
-RUN chown debian-tor:debian-tor /etc/tor
-RUN chown debian-tor:debian-tor /var/log/tor
-RUN mkdir /var/lib/tor/hidden_service
-RUN chown debian-tor:debian-tor /var/lib/tor/hidden_service
+# Install Tor binaries
+RUN set -ex \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	gosu tor tor-geoipdb obfs4proxy --no-install-recommends \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& rm /etc/tor/torrc
 
-USER debian-tor
+# Copy startup script
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["tor", "-f", "/etc/tor/torrc"]
+ENTRYPOINT ["entrypoint.sh"]
