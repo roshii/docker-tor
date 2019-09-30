@@ -1,5 +1,8 @@
 # docker-obfs4-bridge
 
+[![Docker Stars](https://img.shields.io/docker/stars/r0shii/obfs4-bridge.svg)](https://hub.docker.com/r/r0shii/obfs4-bridge/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/r0shii/obfs4-bridge.svg)](https://hub.docker.com/r/r0shii/obfs4-bridge/)
+
 Forked from https://dip.torproject.org/torproject/anti-censorship/docker-obfs4-bridge
 
 This repository contains the docker files for an obfs4 Tor bridge.
