@@ -9,4 +9,4 @@ This repository contains the docker files for an obfs4 Tor bridge.
 This image requires mounting `torrc` file using docker `volume` option as
 follows:
 
-`--volume /path/to/torrc/on/host:/etc/tor`
+`--volume /path/to/torrc/on/host:/var/lib/tor`
