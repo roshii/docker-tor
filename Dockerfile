@@ -16,6 +16,9 @@ RUN set -ex \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm /etc/tor/torrc
 
+RUN set -ex \
+	&& chown -R debian-tor /var/lib/tor
+
 USER debian-tor
 
 ENTRYPOINT ["tor", "-f", "/var/lib/tor/torrc"]
