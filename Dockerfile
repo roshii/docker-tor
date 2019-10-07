@@ -3,8 +3,11 @@ FROM debian:buster-slim
 
 LABEL maintainer="Simon Castano <simon@brane.cc>"
 
-ENV DEBIAN_FRONTEND=noninteractive
 ARG PT_PORT
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV USER=debian-tor
+ENV HOME=/var/lib/tor
 
 # Install Tor binaries
 RUN set -ex \
