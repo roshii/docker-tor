@@ -8,17 +8,17 @@ ARG PT_PORT
 
 # Install Tor binaries
 RUN set -ex \
-	&& apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y \
+	&& apt update \
+	&& apt install --no-install-recommends --no-install-suggests -y \
 	apt-utils \
-	&& apt-get install --no-install-recommends --no-install-suggests -y \
+	&& apt install --no-install-recommends --no-install-suggests -y \
 	gosu \
 	tor \
 	tor-geoipdb \
 	obfs4proxy \
-	&& apt-get purge --auto-remove -y \
+	&& apt purge --auto-remove -y \
 	apt-utils \
-	&& apt-get clean \
+	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm /etc/tor/torrc
 
