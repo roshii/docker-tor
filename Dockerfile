@@ -28,7 +28,6 @@ EXPOSE 9001 ${PT_PORT}
 
 # Copy startup script
 COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["tor", "-f", "/var/lib/tor/torrc"]
