@@ -3,7 +3,7 @@ FROM debian:buster-slim
 
 LABEL maintainer="Simon Castano <simon@brane.cc>"
 
-ARG DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 ARG PT_PORT
 
 # Install Tor binaries
