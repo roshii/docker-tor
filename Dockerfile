@@ -4,6 +4,7 @@ FROM debian:buster-slim
 LABEL maintainer="Simon Castano <simon@brane.cc>"
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG PT_PORT
 
 # Install Tor binaries
 RUN set -ex \
@@ -23,9 +24,7 @@ RUN set -ex \
 
 VOLUME ["/var/lib/tor"]
 
-ARG OR_PORT=55755
-ARG PT_PORT=43462
-EXPOSE ${OR_PORT} ${PT_PORT}
+EXPOSE 9001 ${PT_PORT}
 
 # Copy startup script
 COPY entrypoint.sh /usr/local/bin/
