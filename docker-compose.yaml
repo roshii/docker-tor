@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  bridge:
+    build:
+      context: ./
+      args:
+        PT_PORT: 43462
+    image: tor:obfs4
+    container_name: obfs4
+    network_mode: host
+    volumes:
+      - ./tor:/var/lib/tor
+    restart: unless-stopped
